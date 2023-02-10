@@ -1,0 +1,29 @@
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+hide elements but make them readable for screen readers
+not(:focus):not(:active) will reveal focusable hidden content like links, buttons, input fields, ...
+1. puts whole text into one line, so screen readers can read it properly
+2. IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box
+3. maybe deprecated but we need to support legacy browsers
+4. modern browsers, clip-path works inwards from each corner
+*/
+%visually-hidden {
+  position: absolute;
+  left: -1000in;
+  top: auto;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  border-width: 0;
+  white-space: nowrap; /* 1 */
+  clip: rect(1px 1px 1px 1px); /* 2 */
+  clip: rect(1px, 1px, 1px, 1px); /* 3 */
+  clip-path: inset(50%); /* 4 */
+}

@@ -1,0 +1,69 @@
+@use 'sass:math';
+/*
+# =================================================================
+# SCSS Functions
+# =================================================================
+*/
+
+// Default font-size, keep this like is
+$browser-context: 16;
+
+// shortcut for using css variables
+// color: v(cssVar)
+@function v($cssVar) {
+  @return var(--#{$cssVar});
+}
+
+// Convert pixel value to EM units
+// width: em(200) or width: em(200px)
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return math.div($pixels, $context) * 1em;
+}
+
+// Convert pixel value to REM units
+// width: rem(200) or width: rem(200px)
+@function rem($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return math.div($pixels, $context) + 1rem;
+}
+
+@function css-function($function, $values...) {
+  @return $function + unquote('(') + $values + unquote(')');
+}
+
+/* if you want to use scss variables inside calculation functions */
+@function css-min($values...) {
+  @return css-function(min, $values);
+}
+@function css-max($values...) {
+  @return css-function(max, $values);
+}
+@function css-clamp($values...) {
+  @return css-function(clamp, $values);
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
+}

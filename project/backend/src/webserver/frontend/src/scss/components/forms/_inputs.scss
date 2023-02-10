@@ -1,0 +1,41 @@
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid rgba(50, 50, 50, 0.2);
+  border-radius: 2px;
+  transition: border-color 200ms ease;
+
+  &:hover:not([disabled], [aria-disabled="true"]) {
+    border-color: rgba(50, 50, 50, 0.6);
+  }
+
+  &[disabled],
+  &[aria-disabled="true"] {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    &::selection {
+      color: currentColor;
+    }
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 0.2rem solid rgba(50, 50, 50, 0.2);
+    border-color: rgba(50, 50, 50, 0.8);
+  }
+}
+
+input[type="number"] {
+  &.no-counter-control {
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      display: none;
+    }
+  }
+}

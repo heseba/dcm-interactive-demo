@@ -1,0 +1,57 @@
+fragments:
+  - id: 0
+    name: Add
+    runOn: client
+    location: {filepath: shared/playground.go}
+  - id: 1
+    name: GetHash
+    runOn: client
+    location: {filepath: shared/playground.go}
+    libs: [crypto/sha256, encoding/hex]
+  - id: 2
+    name: CalcMwst
+    runOn: client
+    dependsOn: [3]
+    location: {filepath: shared/playground.go}
+  - id: 3
+    name: Mwst
+    runOn: client
+    globalVar: true
+    location: {filepath: shared/playground.go}
+  - id: 4
+    name: GenObj
+    runOn: client
+    dependsOn: [5]
+    location: {filepath: shared/playground.go}
+  - id: 5
+    name: Person
+    runOn: client
+    location: {filepath: shared/playground.go}
+    typeDef: true
+  - id: 6
+    name: SortStrings
+    runOn: client
+    libs: [sort]
+    location: {filepath: shared/webshop.go}
+  - id: 7
+    name: SortFloats
+    runOn: client
+    libs: [sort]
+    location: {filepath: shared/webshop.go}
+  - id: 8
+    name: IncrementNumber
+    runOn: client
+    location: {filepath: shared/webshop.go}
+  - id: 9
+    name: DecrementNumber
+    runOn: client
+    location: {filepath: shared/webshop.go}
+  - id: 10
+    name: AddFloats
+    runOn: client
+    location: {filepath: shared/webshop.go}
+  - id: 11
+    name: Check
+    runOn: client
+    location: {filepath: shared/webshop.go}
+    libs: [fmt]

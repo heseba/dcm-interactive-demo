@@ -1,0 +1,6 @@
+**/*.wasm
+**/*.so
+**/wasm_exec.js
+**/export.json
+/.env
+.DS_Store

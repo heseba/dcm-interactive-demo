@@ -1,0 +1,104 @@
+@use 'sass:map';
+
+$_alertClass: 'my-alert';
+$_headerPaddingTop: 1rem;
+$_headerPaddingRight: 2rem;
+
+.#{$_alertClass}-wrapper {
+  max-width: 340px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 0.25rem;
+  background: #1b2f56;
+  transform: translateY(calc(-100% - $_headerPaddingTop));
+
+  &.show {
+    animation: show-alert 5s ease-out alternate;
+    display: block;
+  }
+
+  .#{$_alertClass} {
+    padding: 0.25rem 0.8rem;
+    border-radius: 0.25rem;
+    transition: 0.5s;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    border: 1px solid transparent;
+    background-color: currentColor;
+    box-shadow: 0px 0px 2px currentColor;
+    color: currentColor;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      border-left: 1px solid;
+      border-right: 2px solid;
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      height: 20px;
+    }
+  }
+}
+
+$_alerts: (
+  success: (
+    color: #0ad406,
+    border-color: rgba(36, 241, 6, 0.46),
+    boxShadow-color: #259c08,
+    background-color: rgba(7, 149, 66, 0.3),
+    background-hover-color: rgba(7, 149, 66, 0.65),
+  ),
+  error: (
+    color: #ff0303,
+    border-color: rgba(241, 6, 6, 0.81),
+    boxShadow-color: #ff0303,
+    background-color: rgba(220, 17, 1, 0.3),
+    background-hover-color: rgba(220, 17, 1, 0.65),
+  ),
+);
+
+@each $property, $map in $_alerts {
+  $_borderColor: map.get($map, 'border-color');
+  $_backgroundColor: map.get($map, 'background-color');
+  $_backgroundHoverColor: map.get($map, 'background-hover-color');
+  $_boxShadowColor: map.get($map, 'boxShadow-color');
+  $_fontColor: map.get($map, 'color');
+
+  .#{$_alertClass}.#{$property} {
+    text-shadow: 2px 1px #00040a;
+    border-color: $_borderColor;
+    background-color: $_backgroundColor;
+    box-shadow: 0px 0px 2px $_boxShadowColor;
+    color: $_fontColor;
+
+    &:hover {
+      background-color: $_backgroundHoverColor;
+    }
+  }
+}
+
+@keyframes show-alert {
+  0% {
+    transform: translateY(calc(-100% - $_headerPaddingTop));
+  }
+  4%{
+    transform: translateY(30%);
+  }
+  8%,
+  80% {
+    transform: translateY(0);
+  }
+  99% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(calc(100% + $_headerPaddingRight));
+  }
+}

@@ -1,0 +1,93 @@
+@use "../utils/breakpoints" as *;
+@use "../utils/mixins" as mix;
+@use "../utils/extends";
+
+@use "sass:map";
+
+main.playground {
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc(map.get($breakpoints, "phone")) + 1.7rem, 1fr)
+    );
+    gap: 1.5rem;
+
+    @include media("<phone_land") {
+      grid-template-columns: auto;
+    }
+
+    .form__group {
+      margin-bottom: 1rem;
+    }
+
+    .form__btn-group {
+      display: flex;
+      gap: 0.625rem;
+      & > input[type="submit"] {
+        flex: 2;
+      }
+      & > input[type="reset"] {
+        flex: 1;
+      }
+    }
+
+    .form__input {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      min-height: 31px;
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      &:last-child > * {
+        display: flex;
+        align-self: flex-start;
+      }
+
+      @include media("<phone_land") {
+        flex-direction: column;
+        align-items: unset;
+      }
+
+      &__group {
+        @extend %flex-center;
+        flex: 1;
+        gap: 0.625rem;
+      }
+    }
+  }
+
+  form {
+    padding: 0 1.5rem 1.5rem;
+    min-height: 18.75rem;
+    border: 0.0625rem solid rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    fieldset {
+      height: 100%;
+      padding: 0;
+      border-color: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      legend {
+        width: 100%;
+      }
+
+      label {
+        margin-right: 0.625rem;
+      }
+
+      output {
+        word-break: break-all;
+      }
+
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+    }
+  }
+}

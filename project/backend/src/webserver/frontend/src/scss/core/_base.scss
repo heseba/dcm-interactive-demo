@@ -1,0 +1,40 @@
+@use "../utils/colors" as color;
+@use "../utils/constants" as const;
+@use "../utils/breakpoints" as *;
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Lato, sans-serif;
+  font-size: const.$baseFontSize;
+  line-height: 1.3;
+  // prevents parent container from scrolling when the child container reaches the bottom
+  overscroll-behavior: contain; /* or "none" */
+  background-color: color.$white;
+  scroll-padding: const.$navHeight;
+
+  &.no-scroll {
+    height: 100vh;
+    overflow-y: hidden;
+    padding-right: 17px; /* Avoid width reflow */
+
+    @include media(">phone") {
+      padding-right: 0; /* Avoid width reflow */
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: calc(75rem + 1.5rem);
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  height: 100%;
+
+  @include media("<phone") {
+    padding: 0 1.2rem;
+    max-width: calc(75rem + 1.2rem);
+  }
+}

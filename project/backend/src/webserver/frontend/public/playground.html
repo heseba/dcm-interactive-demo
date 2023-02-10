@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/static/fonts/lato.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/lato-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" type="text/css" href="static/css/global.min.css" />
+    <script type="module" src="static/js/playground.js"></script>
+    <title>WASM Playground</title>
+  </head>
+  <body class="preload">
+    <a href="#main-content" id="skip-navigation">Navigation überspringen</a>
+    <header class="site-header">
+      <div class="container">
+        <nav>
+          <ul aria-label="Hauptnavigation">
+            <li><a href="./index.html">Web Shop</a></li>
+            <li>
+              <a href="javascript:void(0)" class="active">WASM Playground</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" class="playground">
+      <div class="container">
+        <h1>WASM Playground</h1>
+        <div class="form-grid">
+          <form>
+            <fieldset>
+              <legend><h2>Addition zweier Int Zahlen</h2></legend>
+
+              <div class="form__group">
+                <div class="form__input">
+                  <label for="add_numberOne">Zahl 1</label>
+                  <input
+                    type="number"
+                    step="1"
+                    oninput="this.value|=0"
+                    class="no-counter-control"
+                    id="add_numberOne"
+                    name="Zahl 1"
+                    required
+                  />
+                </div>
+
+                <div class="form__input">
+                  <label for="add_numberTwo">Zahl 2</label>
+                  <input
+                    type="number"
+                    step="1"
+                    oninput="this.value|=0"
+                    class="no-counter-control"
+                    id="add_numberTwo"
+                    name="Zahl 2"
+                    required
+                  />
+                </div>
+                <div class="form__input">
+                  <label for="add_result">Ergebnis:</label>
+                  <output id="add_result"></output>
+                </div>
+              </div>
+              <div class="form__btn-group">
+                <input
+                  type="submit"
+                  value="berechnen"
+                  id="add_calc"
+                  class="btn"
+                />
+                <input type="reset" accesskey="r" value="reset" class="btn" />
+              </div>
+            </fieldset>
+          </form>
+          <form>
+            <fieldset>
+              <legend><h2>Sha256 Hash ermitteln</h2></legend>
+
+              <div class="form__group">
+                <div class="form__input">
+                  <label for="gethash_message">Nachricht</label>
+                  <input type="text" id="gethash_message" name="Nachricht" />
+                </div>
+
+                <div class="form__input">
+                  <label for="gethash_result">Ergebnis:</label>
+                  <output id="gethash_result"></output>
+                </div>
+              </div>
+              <div class="form__btn-group">
+                <input
+                  type="submit"
+                  value="berechnen"
+                  id="gethash_calc"
+                  class="btn"
+                />
+                <input type="reset" accesskey="r" value="reset" class="btn" />
+              </div>
+            </fieldset>
+          </form>
+          <form>
+            <fieldset>
+              <legend><h2>Mehrwertsteuer berechnen</h2></legend>
+
+              <div class="form__group">
+                <div class="form__input">
+                  <label for="calcmwst_num">Betrag</label>
+                  <div class="form__input__group">
+                    <input
+                      type="number"
+                      class="no-counter-control"
+                      step="any"
+                      id="calcmwst_num"
+                      name="Betrag"
+                      required
+                    />
+                    <span>€</span>
+                  </div>
+                </div>
+                <div class="form__input">
+                  <p>Mwst: + 19.0%</p>
+                </div>
+
+                <div class="form__input">
+                  <label for="calcmwst_result">Ergebnis:</label>
+                  <output id="calcmwst_result"></output>
+                </div>
+              </div>
+              <div class="form__btn-group">
+                <input
+                  type="submit"
+                  value="berechnen"
+                  id="calcmwst_calc"
+                  class="btn"
+                />
+                <input type="reset" accesskey="r" value="reset" class="btn" />
+              </div>
+            </fieldset>
+          </form>
+          <form>
+            <fieldset>
+              <legend><h2>Objekt generieren</h2></legend>
+
+              <div class="form__group">
+                <div class="form__input">
+                  <label for="genobj_name">Name</label>
+                  <input type="text" id="genobj_name" name="Name" required />
+                </div>
+                <div class="form__input">
+                  <label for="genobj_age">Alter</label>
+                  <input
+                    type="number"
+                    class="no-counter-control"
+                    id="genobj_age"
+                    name="Alter"
+                    required
+                  />
+                </div>
+
+                <div class="form__input">
+                  <label for="genobj_result">Ergebnis:</label>
+                  <output id="genobj_result"></output>
+                </div>
+              </div>
+              <div class="form__btn-group">
+                <input
+                  type="submit"
+                  value="generieren"
+                  id="genobj_calc"
+                  class="btn"
+                />
+                <input type="reset" accesskey="r" value="reset" class="btn" />
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

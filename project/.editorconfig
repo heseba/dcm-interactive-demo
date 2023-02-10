@@ -1,0 +1,28 @@
+# Editor configuration, see https://editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+indent_size = 2
+indent_style = space
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+curly_bracket_next_line = false
+spaces_around_operators = true
+
+[*.{js,ts}]
+quote_type = single
+
+[{Makefile,makefile}]
+indent_style = tab
+
+[*.md]
+max_line_length = off
+# because double spaces are line breaks and may be intended
+trim_trailing_whitespace = false
+
+[*.bat]
+end_of_line = crlf

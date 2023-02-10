@@ -1,0 +1,54 @@
+{{ define "header" }} {{- if (ne .RoutePath "") }}
+<a href="#main-content" id="skip-navigation">Navigation überspringen</a>
+<header class="site-header">
+  <div class="container">
+    <nav>
+      <div id="cd-status">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          id="client-icon"
+        >
+          <title>Laptop Icon</title>
+          <path
+            d="M23 17l-4-1c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2l-4 1c0 1 1 2 2 2h18c1 0 2-1 2-2zM5.3 15c-.7 0-1.3-.6-1.3-1.3V7.3C4 6.6 4.6 6 5.3 6h13.4c.7 0 1.3.6 1.3 1.3v6.5c0 .7-.6 1.3-1.3 1.3H5.3z"
+          ></path>
+        </svg>
+        <span id="connection-icon"></span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          id="server-icon"
+        >
+          <title>Server Icon</title>
+          <path
+            d="M3 14h18V9H3v5zm15.5-3c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-9 0h6c.3 0 .5.2.5.5s-.2.5-.5.5h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5zM3 21h1v1h3v-1h10v1h3v-1h1v-5H3v5zm15.5-3c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-9 0h6c.3 0 .5.2.5.5s-.2.5-.5.5h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5zM3 2v5h18V2H3zm8.5 3h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h6c.3 0 .5.2.5.5s-.2.5-.5.5zm3 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm2 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm2 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5z"
+          />
+        </svg>
+      </div>
+      <ul aria-label="Hauptnavigation">
+        <li>
+          {{- if (eq .RoutePath "/") }}
+          <a href="javascript:void(0)" class="active">Web Shop</a>
+          {{- else }}
+          <a href="/">Web Shop</a>
+          {{- end }}
+        </li>
+        <li>
+          {{- if .IsCurrentPage "/playground" }}
+          <a href="javascript:void(0)" class="active">WASM Playground</a>
+          {{- else }}
+          <a href="/playground">WASM Playground</a>
+          {{- end }}
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+{{- end }} {{- end }}

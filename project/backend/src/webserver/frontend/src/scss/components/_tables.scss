@@ -1,0 +1,148 @@
+@use "../utils/colors" as colors;
+@use "../utils/breakpoints" as breakpoints;
+
+.table-scrollable {
+  width: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 3px solid #fff;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.table {
+  $_borderColor: rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+
+  width: 100%;
+  caption-side: bottom;
+
+  thead {
+    box-shadow: inset 0 -2px;
+    border-left: 1px solid $_borderColor;
+    border-right: 1px solid $_borderColor;
+
+    th {
+      padding: 1rem 1rem;
+      background-color: #e2e2e2;
+      color: colors.$black;
+      transition: background-color 100ms ease;
+      &:not(:last-child) {
+        border-right: 0.1rem solid colors.$white;
+      }
+
+      &:hover {
+        background-color: rgba($color: #d1d1d1, $alpha: 0.8);
+        cursor: default;
+      }
+    }
+  }
+
+  tbody {
+    border-left: 1px solid $_borderColor;
+    border-right: 1px solid $_borderColor;
+    border-bottom: 1px solid $_borderColor;
+    tr {
+      transition: background 100ms ease;
+      &:hover,
+      &:nth-of-type(even):hover {
+        background: rgba($color: rgb(214, 234, 255), $alpha: 0.7);
+      }
+      &:nth-of-type(even) {
+        background: rgba(216, 216, 216, 0.2);
+      }
+      &:nth-of-type(odd) {
+        box-shadow: 0 -1px rgba(0, 0, 0, 0.1), 0 1px rgba(0, 0, 0, 0.1);
+      }
+      td {
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+    }
+  }
+
+  tfoot {
+    // create before to apply margin-top
+    &::before {
+      height: 1rem;
+      display: table-row;
+      content: "";
+    }
+
+    tr td {
+      padding: 0.5rem 1rem;
+      text-align: center;
+    }
+  }
+
+  @include breakpoints.media("<tablet") {
+    thead {
+      display: none;
+    }
+
+    tbody {
+      border: none;
+
+      tr {
+        border-bottom: 3px solid #ddd;
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        display: block;
+        box-shadow: 0 -1px rgba(0, 0, 0, 0.1), 0 1px rgba(0, 0, 0, 0.1);
+        &:not(:last-child) {
+          margin-bottom: 0.625em;
+        }
+
+        &:hover,
+        &:nth-of-type(even):hover {
+          background: transparent;
+        }
+        &:nth-of-type(even) {
+          // background: rgba(0, 0, 0, 0.05);
+          background: transparent;
+        }
+
+        td {
+          border-bottom: 1px solid #ddd;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.5rem 0.8rem;
+          text-align: right;
+
+          &::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+          }
+
+          &:last-child {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      display: table;
+      width: 100%;
+      tr {
+        th {
+          text-align: left;
+        }
+        td {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

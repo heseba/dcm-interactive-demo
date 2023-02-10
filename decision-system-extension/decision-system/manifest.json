@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Fragment Distribution Control",
+  "version": "1.0.0",
+  "description": "This is a fragment distribution control extension to update the fragment data via the provided API.",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["http://localhost/*", "http://127.0.0.1/*"],
+  "content_scripts": [
+    {
+      "matches": ["http://localhost/*", "http://127.0.0.1/*"],
+      "css": ["styles/contentStyle.min.css"],
+      "js": ["scripts/contentScript.js"],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "pages/options/options.html",
+    "browser_style": true
+  },
+  "action": {
+    "default_title": "Fragment Distribution Control",
+    "default_popup": "pages/popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/favicon16.png",
+      "32": "assets/icons/favicon32.png",
+      "48": "assets/icons/favicon48.png",
+      "128": "assets/icons/favicon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icons/favicon16.png",
+    "32": "assets/icons/favicon32.png",
+    "48": "assets/icons/favicon48.png",
+    "128": "assets/icons/favicon128.png"
+  }
+}

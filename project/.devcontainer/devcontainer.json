@@ -1,0 +1,67 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.163.1/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+  "name": "Go Development",
+
+  // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+  // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+  "dockerComposeFile": ["../docker-compose.yaml", "docker-compose.yml"],
+
+  // the name of the service for the container that VS Code should use after starting all services
+  "service": "go-dev",
+  // start specific services in your Docker Compose config only
+  "runServices": ["go-dev"],
+
+  // the path VS Code should open by default when connected. This is typically a file mount in .devcontainer/docker-compose.yml
+  "workspaceFolder": "/workspace",
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash"
+      }
+    },
+    // for the vscode go extension inside the devcontainer
+    "go.gopath": "/go",
+    "go.goroot": "/usr/local/go",
+    "go.useLanguageServer": true,
+    "go.languageServerFlags": [
+      "-rpc.trace", // for more detailed debug logging
+      "-logfile",
+      "/tmp/gopls.log",
+      "serve",
+      "--debug",
+      "localhost:4001" // to investigate memory usage, see profiles
+    ],
+    "go.delveConfig": {
+      "debugAdapter": "dlv-dap"
+    }
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "golang.go",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "ExodiusStudios.comment-anchors",
+    "EditorConfig.EditorConfig"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [8000],
+
+  // Use 'portsAttributes' to set default properties for specific forwarded ports. More info: https://code.visualstudio.com/docs/remote/devcontainerjson-reference.
+  // "portsAttributes": {},
+
+  // to be able to use "go install" and execute the application in tinygo
+  "remoteEnv": { "PATH": "/root/go/bin:${containerEnv:PATH}" },
+
+  // stop container after VS Code shuts down.
+  "shutdownAction": "stopCompose",
+
+  // A command string or list of command arguments to run inside the container after is created.
+  "postCreateCommand": "cd ./backend/src/webserver && go mod download"
+}

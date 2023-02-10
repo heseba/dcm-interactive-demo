@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="{{.StaticPath}}fonts/lato.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{.StaticPath}}fonts/lato-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+    {{- if .Styles }}
+      {{- range .Styles }}
+    <link rel="stylesheet" type="text/css" href="{{.}}" />
+      {{- end }}
+    {{- end }}
+    {{- if .Scripts }}
+      {{- range $script := .Scripts }}
+    <script type="module" src="{{$script}}"></script>
+      {{- end}}
+    {{- end }}
+    <title>{{.Title}}</title>
+  </head>
+  <body class="preload">
+    {{- template "header" . }}
+    {{- template "page" . }}
+  </body>
+</html>

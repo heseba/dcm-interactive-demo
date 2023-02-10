@@ -1,0 +1,80 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "Project"
+    },
+    {
+      "path": "./backend/src/webserver",
+      "name": "Webserver"
+    },
+    {
+      "path": "./backend/src/codedistribution",
+      "name": "CodeDistribution"
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/*.min.*": true,
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "**/public/css": true,
+      "**/frontend": true
+    },
+
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all"
+  },
+  "launch": {
+    "configurations": [
+      {
+        "name": "Debug webserver",
+        "type": "go",
+        "request": "launch",
+        "mode": "auto",
+        "apiVersion": 2,
+        "debugAdapter": "dlv-dap",
+        // the file you are starting debugging from
+        // "program": "${fileDirname}",
+        "showLog": true,
+        "trace": "log",
+        "logOutput": "debugger",
+        "output": "${workspaceFolder:Webserver}/debug",
+        "program": "${workspaceFolder:Webserver}",
+        "cwd": "${workspaceFolder:Webserver}"
+        // "program": "/go/src/webserver",
+        // "substitutePath": [
+        //   {
+        //     "from": "${workspaceFolder:Webserver}",
+        //     "to": "/go/src/webserver",
+        //   }
+        // ]
+      }
+    ],
+    "compounds": []
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "compileServerDebug",
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:Webserver}"
+        },
+        "command": "go",
+        "problemMatcher": "$go",
+        "args": [
+          "build",
+          "-gcflags=\"all=-N -l\"",
+          "${workspaceFolder:Webserver}"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        }
+      }
+    ]
+  }
+}

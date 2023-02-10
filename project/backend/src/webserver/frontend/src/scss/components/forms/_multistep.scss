@@ -1,0 +1,169 @@
+@use '../../utils/colors' as *;
+@use '../../utils/functions' as func;
+@use '../../utils/breakpoints' as break;
+@use 'sass:math';
+
+.multistep-form {
+  &__progress {
+    $steps: 3;
+    $radioBorderSize: 0.15rem;
+    $radioSize: 1rem;
+
+    @include break.media('<tablet') {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      margin-bottom: 1.5rem;
+    }
+
+    .steps {
+      width: 100%;
+      display: flex;
+
+      @include break.media('<tablet') {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .step {
+        $paddingBottom: 0.5rem;
+
+        display: flex;
+        justify-content: flex-end;
+        width: math.div(100%, $steps);
+        position: relative;
+
+        @include break.media('<tablet') {
+          width: 100%;
+          // max-width: 11rem;
+        }
+
+        span,
+        label {
+          width: 100%;
+          padding-bottom: $paddingBottom;
+          cursor: default;
+          height: 2.25rem;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+
+          @include break.media('<tablet') {
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 0;
+
+            // justify-content: flex-start;
+            // align-items: flex-start;
+          }
+        }
+        label {
+          position: absolute;
+          opacity: 0;
+        }
+
+        &:last-child input[type='radio'] {
+          right: 0;
+        }
+
+        input[type='radio'] {
+          $positionBottom: -$paddingBottom *
+            (func.strip-unit($radioSize) + func.strip-unit($radioBorderSize));
+
+          @include break.media('<tablet') {
+            position: static;
+            display: none;
+          }
+
+          position: absolute;
+          bottom: $positionBottom;
+          right: -(math.div($radioSize + $radioBorderSize, 2));
+          // right: 50%;
+
+          height: $radioSize;
+          width: $radioSize;
+
+          appearance: none;
+          background-color: $white;
+          margin: 0;
+          color: $secondary;
+          border: $radioBorderSize solid currentColor;
+          border-radius: 50%;
+          cursor: pointer;
+          z-index: 1;
+
+          // labels when not disabled
+          &:not([disabled]) ~ span,
+          &:not([disabled]) ~ label {
+            cursor: pointer;
+          }
+          // labels when disabled
+          &[disabled] ~ span {
+            color: #999999;
+            @include break.media('<tablet') {
+              font-size: 0.8em;
+              font-size: clamp(0.8em, 4vw, 1.1em);
+            }
+          }
+          // labels when checked
+          &[checked] ~ span {
+            color: $secondary;
+            font-weight: bold;
+
+            @include break.media('<tablet') {
+              font-size: 1.3em;
+              font-size: clamp(1.3em, 6vw, 1.6em);
+            }
+          }
+
+          // checkbox
+          &[checked] {
+            border: $radioBorderSize solid transparent;
+            background-color: $secondary;
+          }
+          // only breathe when not focused
+          &:not(:focus)[checked] {
+            animation: breathe 1.7s infinite ease-in-out 0.27s;
+          }
+          &:focus {
+            // outline: 2px solid $secondary;
+            // outline-offset: 2px;
+            box-shadow: 0 0 0 2px $white, 0 0 3px 2px $secondary,
+              0 0 9px 0 $secondary;
+          }
+
+          &[disabled] {
+            border-color: #999999;
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
+
+  &__content {
+    .stages {
+      width: 100%;
+      height: auto;
+      position: relative;
+
+      [class^='stage'] {
+        position: absolute;
+        height: 100%;
+        visibility: hidden;
+        opacity: 0;
+        display: none; // get rid of the height
+
+        &.active {
+          position: relative;
+          visibility: visible;
+          opacity: 1;
+          display: block;
+          animation: changeStage 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}

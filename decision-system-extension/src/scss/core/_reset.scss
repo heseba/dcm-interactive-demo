@@ -1,0 +1,60 @@
+$baseFontSize: 1rem;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%; /* 1 */
+  -ms-text-size-adjust: 100%; /* 1 */
+  -moz-tab-size: 4; /* 2 */
+  tab-size: 4; /* 2 */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.15;
+  font-size: $baseFontSize;
+  font-weight: 400;
+  font-family: 
+    /* macOS 10.11-10.12 */ -apple-system, BlinkMacSystemFont,
+    /* Windows 6+ */ 'Segoe UI', /* Android 4+ */ 'Roboto',
+    /* Ubuntu 10.10+ */ 'Ubuntu', 'Helvetica Neue', /* fallback */ Arial,
+    sans-serif, /* macOS emoji */ 'Apple Color Emoji',
+    /* Windows emoji */ 'Segoe UI Emoji', /* Windows emoji */ 'Segoe UI Symbol',
+    /* Linux emoji */ 'Noto Color Emoji';
+}
+
+body {
+  margin: 0;
+  font-size: $baseFontSize;
+}
+
+$shrinkBaseFont: 0.6;
+
+h1,
+.h1 {
+  font-size: calc(2em * $shrinkBaseFont);
+}
+h2,
+.h2 {
+  font-size: calc(1.5em * $shrinkBaseFont);
+}
+h3,
+.h3 {
+  font-size: calc(1.17em * $shrinkBaseFont);
+}
+h4,
+.h4 {
+  font-size: calc(1em * $shrinkBaseFont);
+}
+h5,
+.h5 {
+  font-size: calc(0.83em * $shrinkBaseFont);
+}
+h6,
+.h6 {
+  font-size: calc(0.67em * $shrinkBaseFont);
+}

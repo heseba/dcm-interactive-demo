@@ -1,0 +1,12 @@
+@use "./functions" as fn;
+
+/*
+# =================================================================
+# VARIABLES
+# =================================================================
+*/
+
+$baseFontSize: fn.em(16);
+// /styles/css/global.css -> #{$assetsPath}
+$assetsPath: "/static";
+$navHeight: 4.375rem;

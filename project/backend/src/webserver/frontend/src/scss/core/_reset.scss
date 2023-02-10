@@ -1,0 +1,200 @@
+/*
+# =================================================================
+# RESET
+# =================================================================
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+* 1. Prevent adjustments of font size after orientation changes on Windows Phone and iOS
+* 2. Use a 4-space tab width in all browsers (opinionated).
+*/
+html {
+  -webkit-text-size-adjust: 100%; /* 1 */
+  -ms-text-size-adjust: 100%; /* 1 */
+  -moz-tab-size: 4; /* 2 */
+  tab-size: 4; /* 2 */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.15;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family:
+    /* macOS 10.11-10.12 */ -apple-system, BlinkMacSystemFont,
+    /* Windows 6+ */ "Segoe UI",
+    /* Android 4+ */ "Roboto",
+    /* Ubuntu 10.10+ */ "Ubuntu", "Helvetica Neue",
+    /* fallback */ Arial,sans-serif,
+    /* macOS emoji */ "Apple Color Emoji",
+    /* Windows emoji */ "Segoe UI Emoji",
+    /* Windows emoji */ "Segoe UI Symbol",
+    /* Linux emoji */ "Noto Color Emoji";
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+// reset h1 font-size inside a (article, aside, nav, section)
+// https://stackoverflow.com/questions/39547412/same-font-size-for-h1-and-h2-in-article
+:-webkit-any(article, aside, nav, section) h1 {
+  font-size: 2em;
+}
+:is(article, aside, nav, section) h1 {
+  font-size: 2em;
+}
+
+/* only lists which have a class*/
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Remove the default button styling in all browsers */
+button,
+input,
+select,
+textarea {
+  // background-color: transparent;
+  // border-style: none;
+  &,
+  optgroup {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+  }
+}
+
+// Prevent double borders
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge 18- and IE.
+ */
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+// Add the correct font size in all browsers.
+small {
+  font-size: 80%;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family:
+    /* macOS 10.10+ */ "Menlo",
+    /* Windows 6+ */ "Consolas",
+    /* Android 4+ */ "Roboto Mono",
+    /* Ubuntu 10.10+ */ "Ubuntu Monospace",
+    /* KDE Plasma 5+ */ "Noto Mono",
+    /* KDE Plasma 4+ */ "Oxygen Mono",
+    /* Linux/OpenOffice fallback */ "Liberation Mono",
+    /* fallback */ monospace,
+    /* macOS emoji */ "Apple Color Emoji",
+    /* Windows emoji */ "Segoe UI Emoji",
+    /* Windows emoji */ "Segoe UI Symbol",
+    /* Linux emoji */ "Noto Color Emoji";
+}
+
+/*
+# =================================================================
+# Compatibility
+# =================================================================
+*/
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+main {
+  display: block;
+}
+
+/* Firefox 40+, Internet Explorer 11- */
+button,
+select {
+  text-transform: none;
+}
+
+/* Remove the gray background on active links in IE 10 */
+a {
+  background-color: transparent;
+}
+
+/* Add the correct display in IE */
+[hidden] {
+  display: none;
+}
+
+[invisible] {
+  visibility: hidden;
+}
+
+/* Hide the overflow in IE which are not inside the html element. */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Correct the inability to style buttons in iOS and Safari. */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * IE 8-11 and Prince don't recognize the `wbr` element,
+ * but a pseudo-element can achieve the same effect with IE 9+ and Prince.
+ */
+wbr:before {
+  /* Unicode zero width space */
+  content: "\200B";
+  white-space: normal;
+}

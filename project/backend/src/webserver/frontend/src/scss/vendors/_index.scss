@@ -1,0 +1,12 @@
+/* 
+# =================================================================
+# Access this file and it will forward all included files to be usable.
+# =================================================================
+*/
+
+// @use "vendorfolder/custom" as custom;
+// @forward "vendorfolder/sass/vendor.scss" with(
+//   $vendor-var: custom.$vendor-var
+// );
+
+// or @import

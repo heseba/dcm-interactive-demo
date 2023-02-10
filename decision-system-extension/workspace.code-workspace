@@ -1,0 +1,80 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "Project"
+    },
+    {
+      "path": "./decision-system",
+      "name": "Extension"
+    },
+    {
+      "path": "./src/scss",
+      "name": "Styles"
+    }
+  ],
+  "settings": {},
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Sass Compiler",
+        "type": "shell",
+        "command": "sass",
+        "args": [
+          "--style=compressed",
+          // "--no-error-css",
+          "${workspaceFolder:Styles}/contentStyle.scss:${workspaceFolder:Extension}/styles/contentStyle.min.css",
+          "${workspaceFolder:Styles}/popup.scss:${workspaceFolder:Extension}/pages/popup/popup.min.css"
+        ],
+        "group": "build",
+        "problemMatcher": ["$node-sass"]
+      },
+      {
+        "label": "Sass Watcher",
+        "group": "build",
+        "dependsOrder": "parallel",
+        "dependsOn": ["sass-expanded", "sass-compressed"],
+        "problemMatcher": []
+      },
+      {
+        "label": "sass-expanded",
+        "type": "shell",
+        "isBackground": true,
+        "presentation": {
+          "reveal": "always",
+          "showReuseMessage": false
+        },
+        "command": "sass",
+        "args": [
+          "-w",
+          "--style=expanded",
+          // "--no-error-css",
+          "${workspaceFolder:Styles}/contentStyle.scss:${workspaceFolder:Extension}/styles/contentStyle.css",
+          "${workspaceFolder:Styles}/popup.scss:${workspaceFolder:Extension}/pages/popup/popup.css"
+        ],
+        "group": "build",
+        "problemMatcher": ["$node-sass"]
+      },
+      {
+        "label": "sass-compressed",
+        "type": "shell",
+        "isBackground": true,
+        "presentation": {
+          "reveal": "never",
+          "showReuseMessage": false
+        },
+        "command": "sass",
+        "args": [
+          "-w",
+          "--style=compressed",
+          // "--no-error-css",
+          "${workspaceFolder:Styles}/contentStyle.scss:${workspaceFolder:Extension}/styles/contentStyle.min.css",
+          "${workspaceFolder:Styles}/popup.scss:${workspaceFolder:Extension}/pages/popup/popup.min.css"
+        ],
+        "group": "build",
+        "problemMatcher": ["$node-sass"]
+      }
+    ]
+  }
+}

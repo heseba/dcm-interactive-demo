@@ -1,0 +1,154 @@
+@use "../utils/colors" as colors;
+@use "sass:color" as color;
+
+$btnTextColor: colors.$black;
+$btnBgColor: #fafbfc;
+$btnBorderColor: rgba(27, 31, 35, 0.15);
+
+$btnBgColor-hover: #f3f4f6;
+$btnBorderColor-hover: rgba(27, 31, 35, 0.15);
+
+$btnBgColor-active: #ebecf0;
+$btnBorderColor-active: rgba(27, 31, 35, 0.1);
+
+a.btn,
+a.btn-link {
+  text-decoration: none;
+}
+
+button.btn {
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+
+  @media screen and (-ms-high-contrast: active) {
+    border: 2px solid currentcolor;
+  }
+}
+
+input[type="submit"].btn,
+input[type="button"].btn,
+input[type="reset"].btn {
+  cursor: pointer;
+}
+
+a.btn,
+button.btn,
+input[type="submit"].btn,
+input[type="button"].btn,
+input[type="reset"].btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: $btnBgColor;
+  border: 1px solid $btnBorderColor;
+  border-radius: 8px;
+  color: $btnTextColor;
+  // box-shadow: 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  // 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+  appearance: none;
+  padding: 0.5em 0.8em; // padding should scale with font-size
+  min-width: 7ch;
+  min-height: 44px; // WCAG 2.5.5 - Target Size - 44px
+  // transition: 220ms background-color ease-out;
+  transition: 200ms cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+
+  &:hover {
+    background-color: $btnBgColor-hover;
+    border-color: $btnBorderColor-hover;
+    transition-duration: 100ms;
+  }
+
+  &:active {
+    &:not([aria-disabled="true"], [disabled]) {
+      background-color: $btnBgColor-active;
+      border-color: $btnBorderColor-active;
+      transition: none;
+    }
+  }
+
+  // focus ring
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    // will not change the overall element size => no shifts
+    // and animated on main element will harm performance
+    box-shadow: 0 0 0 2px scale-color($btnBgColor, $lightness: -80%);
+    opacity: 0;
+    transition: 220ms opacity ease-in-out;
+  }
+
+  // -visible is not well supported
+  // input elements are closing element <input /> and therefore cannot have ::before or ::after elements
+  &:focus-visible:not(input) {
+    outline-style: solid;
+    outline-color: transparent;
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &[aria-disabled="true"],
+  &[disabled] {
+    color: color.adjust($btnTextColor, $whiteness: 70%);
+    background-color: color.adjust($btnBgColor, $whiteness: 10%);
+    cursor: not-allowed;
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--small {
+    font-size: 0.8rem;
+  }
+
+  &--big {
+    font-size: 1.3rem;
+  }
+
+  &.loading {
+    color: transparent;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2em;
+      height: 2em;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      border: .24em solid rgba(0, 0, 0, 0.2);
+      border-top: .24em solid rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      will-change: transform;
+      animation: button-loading-spinner 1s linear infinite;
+    }
+
+    &.anim-pause {
+      &::after {
+        border: .24em solid transparent;
+        border-top: .24em solid rgba(0, 0, 0, 0.7);
+        animation: button-loading-spinner 1s ease infinite;
+      }
+    }
+  }
+}

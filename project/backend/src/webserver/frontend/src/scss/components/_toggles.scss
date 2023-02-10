@@ -1,0 +1,360 @@
+@use 'sass:math';
+
+@use '../utils/colors' as *;
+
+@mixin toggle-options-appearance(
+  $toggle-off-bg: rgb(114, 114, 114),
+  $toggle-on-bg: rgb(114, 114, 114),
+  $toggle-inactive-text: $white,
+  $toggle-shadow: 0 3px 3px rgba(black, 0.4)
+) {
+  // lighten($toggle-off-bg, 5%);
+  // lighten($toggle-on-bg, 5%);
+  $inactive-bg: #9f9f9f;
+  // $toggle-off-bg;
+  // $toggle-on-bg;
+  $inactive-bg-hover: #919191;
+
+  input[type='checkbox'] {
+    // text color next tot he toggle when checkbox is disabled
+    &[disabled] ~ label {
+      color: rgba($toggle-off-bg, 0.5);
+    }
+
+    // styles when checkbox is unchecked (left side)
+    &:focus,
+    &:hover {
+      ~ label {
+        // thumb color and background
+        .toggle__body {
+          background-color: $inactive-bg-hover;
+          &::after {
+            // color: darken($toggle-off-bg, 10%);
+            color: $white;
+          }
+        }
+      }
+    }
+
+    // styles when checkbox is checked (right side)
+    &:checked {
+      &:focus,
+      &:hover {
+        // toggle text next to the toggle on hover
+        ~ label {
+          .toggle__body {
+            background-color: $inactive-bg-hover;
+            // thumb
+            &::after {
+              // color: darken($toggle-on-bg, 10%);
+              color: $white;
+            }
+          }
+        }
+      }
+
+      ~ label {
+        .toggle__body {
+          // background color of the body
+          background-color: $inactive-bg;
+          // thumb text color
+          &::after {
+            // color: darken($toggle-on-bg, 5%);
+
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  label {
+    .toggle__body {
+      background: $inactive-bg;
+      &::before {
+        color: $toggle-inactive-text;
+      }
+      // Moving Thumb
+      &::after {
+        // color: $toggle-off-bg;
+        box-shadow: 0 16px 26px -10px rgb(244 67 54 / 56%),
+          0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(244 67 54 / 20%);
+        color: $white;
+        background: $primary;
+      }
+    }
+  }
+}
+
+@mixin toggle-switch-appearance(
+  $toggle-off-bg: rgb(114, 114, 114),
+  $toggle-on-bg: #5fc054,
+  $toggle-inactive-text: $white,
+  $toggle-shadow: 0 3px 3px rgba(black, 0.4),
+  $toggle-transition: cubic-bezier(0, 1, 0.5, 1)
+) {
+  input[type='checkbox'] {
+    // text color next tot he toggle when checkbox is disabled
+    &[disabled] ~ label {
+      color: rgba($toggle-off-bg, 0.5);
+    }
+
+    &:focus-visible {
+      ~ label {
+        outline: 2px solid $primary;
+        border-radius: 3px;
+        outline-offset: 0.18rem;
+      }
+    }
+
+    // styles when checkbox is unchecked (left side)
+    &:focus,
+    &:hover {
+      ~ label {
+        // thumb color and background
+        .toggle__body {
+          background-color: $toggle-off-bg;
+
+          &::after {
+            color: darken($toggle-off-bg, 10%);
+            // box-shadow: $toggle-shadow;
+          }
+        }
+      }
+    }
+
+    // toggle text next to the toggle
+    &:hover ~ label {
+      // color: darken($toggle-off-bg, 5%);
+    }
+
+    // styles when checkbox is checked (right side)
+    &:checked {
+      &:focus,
+      &:hover {
+        // toggle text next to the toggle on hover
+        ~ label {
+          // color: $toggle-on-bg;
+
+          .toggle__body {
+            background-color: $toggle-on-bg;
+            // thumb
+            &::after {
+              color: darken($toggle-on-bg, 10%);
+            }
+          }
+        }
+      }
+
+      ~ label {
+        // toggle text next to the toggle on hover
+        &:hover {
+          // color: darken($toggle-on-bg, 3%);
+        }
+
+        .toggle__body {
+          // background color of the body
+          background-color: lighten($toggle-on-bg, 5%);
+          // thumb text color
+          &::after {
+            color: darken($toggle-on-bg, 5%);
+          }
+        }
+      }
+    }
+  }
+
+  label {
+    .toggle__text {
+      flex: 1;
+    }
+
+    .toggle__body {
+      transition: background-color 0.3s $toggle-transition;
+      background: lighten($toggle-off-bg, 5%);
+      &::before {
+        color: $toggle-inactive-text;
+      }
+      &::after {
+        -webkit-transition: -webkit-transform 0.3s $toggle-transition;
+        transition: transform 0.3s $toggle-transition;
+        color: $toggle-off-bg;
+      }
+
+      // hover over switch
+      &:hover {
+        &::after {
+          // box-shadow: $toggle-shadow;
+        }
+      }
+    }
+  }
+}
+
+@mixin toggle-switch-dimensions(
+  $toggle-width: 15rem,
+  $toggle-height: 3rem,
+  $toggle-border-radius: 0.25rem,
+  $toggle-offset: 0.125rem,
+  $toggle-label-font-size: 14px,
+  $toggle-switch-font-size: 12px
+) {
+  $toggle-switch-width: math.div($toggle-width, 2);
+  width: $toggle-width;
+
+  input[type='checkbox'] {
+    // CHECKED STATE
+    &:checked {
+      ~ label {
+        .toggle__body {
+          &::after {
+            transform: translate3d(
+              $toggle-width - ($toggle-switch-width + $toggle-offset),
+              0,
+              0
+            );
+          }
+        }
+      }
+    }
+  }
+
+  label {
+    font-size: $toggle-label-font-size;
+
+    .toggle__body {
+      height: $toggle-height;
+      flex: 0 0 $toggle-width;
+      border-radius: $toggle-border-radius;
+
+      // Body (background)
+      &::before {
+        left: math.div($toggle-width, 2);
+        font-size: $toggle-switch-font-size;
+        line-height: $toggle-height;
+        width: math.div($toggle-width, 2);
+        padding: 0 12px;
+      }
+
+      // Moving Thumb
+      &::after {
+        top: $toggle-offset;
+        left: $toggle-offset;
+        border-radius: math.div($toggle-border-radius, 2);
+        width: $toggle-switch-width - $toggle-offset;
+        line-height: $toggle-height - ($toggle-offset * 2);
+        font-size: $toggle-switch-font-size;
+      }
+    }
+  }
+}
+
+// BASIC SETUP
+.toggle {
+  position: relative;
+  // margin: 1rem;
+
+  // hide the default toggle, setup styles on states
+  input[type='checkbox'] {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    // disabled toggle
+    &[disabled] ~ label {
+      pointer-events: none;
+      .toggle__body {
+        opacity: 0.4;
+      }
+    }
+
+    // styles if checked
+    &:checked {
+      ~ label {
+        .toggle__body {
+          // content left
+          &::before {
+            content: attr(data-unchecked);
+            left: 0;
+          }
+
+          // content right
+          &::after {
+            content: attr(data-checked);
+          }
+        }
+      }
+    }
+  }
+
+  label {
+    user-select: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    // Text next to the Toggle
+    .toggle__text {
+      flex: 1;
+      padding-left: 32px;
+    }
+
+    .toggle__body {
+      position: relative;
+      cursor: pointer;
+
+      // Body (background)
+      &::before {
+        content: attr(data-checked);
+        position: absolute;
+        top: 0;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      // Moving Thumb
+      &::after {
+        content: attr(data-unchecked);
+        position: absolute;
+        z-index: 1;
+        text-transform: uppercase;
+        text-align: center;
+        background: $white;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+
+  // Default values for .toggle class
+  @include toggle-switch-appearance;
+  @include toggle-switch-dimensions;
+
+  &--options {
+    @include toggle-options-appearance;
+  }
+
+  &.glide {
+  }
+
+  &.text-visually-hidden {
+    // overflow: hidden; // fill also hide the focus border
+    label {
+      .toggle__text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+    }
+  }
+  &.text-hidden {
+    // overflow: hidden; // fill also hide the focus border
+    label {
+      .toggle__text {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
+}

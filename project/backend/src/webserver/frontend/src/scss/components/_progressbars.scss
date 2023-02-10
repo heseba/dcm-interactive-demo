@@ -1,0 +1,111 @@
+@use "../utils/colors" as *;
+@use "../utils/breakpoints" as *;
+@use "sass:math";
+
+// @mixin progress-steps($min: 0, $max: 100) {
+//   @for $i from $min through $max {
+//     &[aria-valuenow='#{$i}'] {
+//       > .progressbar__progress {
+//         width: math.div($i, $max) * 100%;
+//       }
+//     }
+//   }
+// }
+
+// can be animated, weak browser support
+@property --progressValueNumber {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --progressMaxValueNumber {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 3;
+}
+
+.progressbar[role="progressbar"] {
+  // don't put this in media queries
+  --progressValueNumber: var(--progressValue);
+  --progressMaxValueNumber: var(--progressMaxValue);
+
+  $circleSize: clamp(5rem, 23vw, 7rem);
+  $innerCircleSize: 75%;
+
+  width: 100%;
+  height: 0.2rem;
+  background: #e3e3e3;
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  @include media("<tablet") {
+    //// jagged lines
+    // background: radial-gradient(
+    //     closest-side,
+    //     $white $innerCircleSize,
+    //     transparent 0 99.9%,
+    //     $white 0
+    //   ),
+    //   conic-gradient(
+    //     $secondary calc((var(--progressValueNumber) / var(--progressMaxValue)) * 100%),
+    //     #e3e3e3 0
+    //   );
+
+    background: conic-gradient(
+      $secondary
+        calc(
+          (var(--progressValueNumber) / var(--progressMaxValueNumber)) * 100%
+        ),
+      #e3e3e3 0
+    );
+    transition: --progressValueNumber 0.27s ease;
+    border-radius: 50%;
+
+    width: $circleSize;
+    height: $circleSize;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 20%);
+    display: flex;
+    flex-shrink: 0;
+    margin-bottom: 0;
+
+    // progress text in circle
+    &::before {
+      position: absolute;
+      content: attr(aria-valuenow) "/" attr(aria-valuemax);
+      font-size: 1.1em;
+      font-size: clamp(1.3em, 6vw, 1.7em);
+
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: $secondary;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+  }
+
+  // on desktop its the visual progress, on mobile its the inner background
+  .progressbar__progress {
+    display: block;
+    height: 100%;
+    // width would animate from 100 to 33 when shrinking viewport without it
+    max-width: calc((var(--progressValue) / var(--progressMaxValue)) * 100%);
+    background: $secondary;
+    border-radius: 3px;
+    transition: max-width 0.27s ease;
+
+    @include media("<tablet") {
+      height: $innerCircleSize;
+      width: $innerCircleSize;
+      max-width: none;
+      background-color: $white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: none;
+    }
+  }
+}

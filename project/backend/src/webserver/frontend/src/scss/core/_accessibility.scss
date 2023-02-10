@@ -1,0 +1,58 @@
+@use "../utils/extends";
+
+/*
+# =================================================================
+# Accessibility
+# =================================================================
+*/
+
+.visually-hidden:not(:focus):not(:active) {
+  @extend %visually-hidden; // to use it in media queries
+}
+
+// same as .visually-hidden but here you can decide if you want to hide the element even if it's focusable or reveal it with .a11y-focusable on focus again
+.a11y-hidden {
+  @extend %visually-hidden;
+}
+.a11y-focusable:focus {
+  position: initial;
+  left: auto;
+  height: auto;
+  width: auto;
+  padding: initial;
+  margin: initial;
+  overflow: auto;
+  border-width: initial;
+  white-space: initial;
+  clip: auto;
+  clip-path: initial;
+}
+
+/*
+1. Remove the tapping delay in IE 10.
+2. Remove the tapping delay on clickable elements in all browsers.
+*/
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+  -ms-touch-action: manipulation; /* 1 */
+  touch-action: manipulation; /* 2 */
+}
+
+/*
+Remove all animations and transitions for people that prefer not to see them
+*/
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

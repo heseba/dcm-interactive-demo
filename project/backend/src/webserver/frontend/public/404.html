@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preload" href="/static/fonts/lato.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/lato-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="static/css/404.min.css" />
+    <title>404 - Not Found</title>
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="overlay"></div>
+    <div class="terminal">
+      <h1>Error <span class="errorcode">404</span></h1>
+      <p class="output">
+        The page you are looking for might have been removed, had its name
+        changed or is temporarily unavailable.
+      </p>
+      <p class="output">
+        Please try to
+        <a
+          href="javascript:void(0)"
+          onclick="typeof window.navigation !== 'undefined' ? navigation.back() : history.back()"
+          >go back</a
+        >
+        or <a href="/">return to the homepage</a>.
+      </p>
+    </div>
+  </body>
+</html>

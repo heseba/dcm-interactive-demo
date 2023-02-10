@@ -1,0 +1,161 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "Project"
+    },
+    {
+      "path": "./backend/src/webserver/frontend",
+      "name": "Frontend"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "backend": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/*.min.*": true,
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "**/public/css": true
+    },
+
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+
+    "liveServer.settings.multiRootWorkspaceName": "Frontend",
+    "liveServer.settings.root": "/public",
+    "liveServer.settings.port": 10000,
+    // "liveServer.settings.NoBrowser": true,
+    "liveServer.settings.CustomBrowser": "chrome",
+    // "liveServer.settings.ChromeDebuggingAttachment": true,
+
+    "liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions"],
+    "liveSassCompile.settings.excludeList": [],
+    "liveSassCompile.settings.formats": [
+      {
+        "format": "expanded",
+        "extensionName": ".css",
+        "savePath": "/public/static/css"
+      },
+      {
+        "format": "compressed",
+        "extensionName": ".min.css",
+        "savePath": "/public/static/css"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Sass Compiler",
+        "type": "shell",
+        "command": "sass",
+        "args": [
+          "--style=compressed",
+          // "--no-error-css",
+          "${workspaceFolder:Frontend}/src/scss/global.scss:${workspaceFolder:Frontend}/public/static/css/global.min.css",
+          "${workspaceFolder:Frontend}/src/scss/404.scss:${workspaceFolder:Frontend}/public/static/css/404.min.css"
+        ],
+        "group": "build",
+        "problemMatcher": ["$node-sass"]
+      },
+      {
+        "label": "Sass Watcher",
+        "group": "build",
+        "dependsOrder": "parallel",
+        "dependsOn": ["sass-expanded", "sass-compressed"],
+        "problemMatcher": []
+      },
+      {
+        "label": "sass-expanded",
+        "type": "shell",
+        "isBackground": true,
+        "presentation": {
+          "reveal": "always",
+          "showReuseMessage": false
+        },
+        "command": "sass",
+        "args": [
+          "-w",
+          "--style=expanded",
+          // "--no-error-css",
+          "${workspaceFolder:Frontend}/src/scss:${workspaceFolder:Frontend}/public/static/css"
+        ],
+        "group": "build",
+        "problemMatcher": ["$node-sass"]
+      },
+      {
+        "label": "sass-compressed",
+        "type": "shell",
+        "isBackground": true,
+        "presentation": {
+          "reveal": "never",
+          "showReuseMessage": false
+        },
+        "command": "sass",
+        "args": [
+          "-w",
+          "--style=compressed",
+          // "--no-error-css",
+          "${workspaceFolder:Frontend}/src/scss/global.scss:${workspaceFolder:Frontend}/public/static/css/global.min.css",
+          "${workspaceFolder:Frontend}/src/scss/404.scss:${workspaceFolder:Frontend}/public/static/css/404.min.css"
+        ],
+        "group": "build",
+        "problemMatcher": ["$node-sass"]
+      },
+      {
+        "label": "StartDevserver",
+        "type": "process",
+        "command": "${input:startDevserver}"
+      },
+      {
+        "label": "StopDevserver",
+        "type": "process",
+        "command": "${input:stopDevserver}"
+      }
+    ],
+    "inputs": [
+      {
+        "id": "startDevserver",
+        "type": "command",
+        "command": "extension.liveServer.goOnline"
+      },
+      {
+        "id": "stopDevserver",
+        "type": "command",
+        "command": "extension.liveServer.goOffline"
+      }
+    ]
+  },
+  "launch": {
+    "configurations": [
+      {
+        "name": "Debug with Devserver",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "url": "http://127.0.0.1:10000",
+        "webRoot": "${workspaceFolder:Frontend}/public",
+        "skipFiles": ["<node_internals>/**", "**/node_modules"],
+        "smartStep": true,
+        "preLaunchTask": "StartDevserver"
+        // "postDebugTask": "StopDevserver"
+      },
+      {
+        // set breakpoint in the browser
+        "name": "Debug with Server",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "url": "http://127.0.0.1:5005",
+        "port": 9229,
+        "webRoot": "${workspaceFolder:Frontend}/public",
+        "skipFiles": ["<node_internals>/**", "**/node_modules"],
+        "smartStep": true,
+        "trace": true
+      }
+    ],
+    "compounds": []
+  }
+}

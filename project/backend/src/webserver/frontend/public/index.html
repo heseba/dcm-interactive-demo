@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/static/fonts/lato.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/lato-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" type="text/css" href="static/css/global.min.css" />
+    <script type="module" src="static/js/index.js"></script>
+    <title>Web Shop</title>
+  </head>
+  <body class="preload">
+    <a href="#main-content" id="skip-navigation">Navigation überspringen</a>
+    <header class="site-header">
+      <div class="container">
+        <nav>
+          <div id="cd-status">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              id="client-icon"
+            >
+              <title>Laptop Icon</title>
+              <path
+                d="M23 17l-4-1c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2l-4 1c0 1 1 2 2 2h18c1 0 2-1 2-2zM5.3 15c-.7 0-1.3-.6-1.3-1.3V7.3C4 6.6 4.6 6 5.3 6h13.4c.7 0 1.3.6 1.3 1.3v6.5c0 .7-.6 1.3-1.3 1.3H5.3z"
+              ></path>
+            </svg>
+            <span id="connection-icon"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              id="server-icon"
+            >
+              <title>Server Icon</title>
+              <path
+                d="M3 14h18V9H3v5zm15.5-3c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-9 0h6c.3 0 .5.2.5.5s-.2.5-.5.5h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5zM3 21h1v1h3v-1h10v1h3v-1h1v-5H3v5zm15.5-3c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-2 0c.3 0 .5.2.5.5s-.2.5-.5.5-.5-.2-.5-.5.2-.5.5-.5zm-9 0h6c.3 0 .5.2.5.5s-.2.5-.5.5h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5zM3 2v5h18V2H3zm8.5 3h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h6c.3 0 .5.2.5.5s-.2.5-.5.5zm3 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm2 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm2 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5z"
+              />
+            </svg>
+          </div>
+          <ul aria-label="Hauptnavigation">
+            <li><a href="javascript:void(0)" class="active">Web Shop</a></li>
+            <li><a href="./playground.html">WASM Playground</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content">
+      <div class="container">
+        <div class="main-header">
+          <h1>Web Shop</h1>
+          <span
+            >Websocket <span id="websocketStatus" data-status="offline"></span
+          ></span>
+        </div>
+        <div class="product-grid">
+          <div class="product" data-shopid="mug">
+            <div class="product__cover">
+              <img
+                class="img--mug"
+                src="static/img/mug.jpg"
+                height="370"
+                alt="Eine weiße Tasse auf der Fensterbank."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Tasse</p>
+                <p class="product__price">15,99 €</p>
+              </div>
+              <button type="button" type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="clock">
+            <div class="product__cover">
+              <img
+                class="img--clock"
+                src="static/img/clock.jpg"
+                height="370"
+                alt="Eine weiße Wanduhr mit pinkem Rahmen an einer Wand."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Wanduhr</p>
+                <p class="product__price">8,00 €</p>
+              </div>
+              <button type="button" type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="chair">
+            <div class="product__cover">
+              <img
+                class="img--chair"
+                src="static/img/chair.jpg"
+                height="370"
+                alt="Ein grauer Stoffstuhl mit vier Holzbeinen."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Stuhl</p>
+                <p class="product__price">21,99 €</p>
+              </div>
+              <button type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="lamp">
+            <div class="product__cover">
+              <img
+                class="img--lamp"
+                src="static/img/lamp.jpg"
+                height="370"
+                alt="Eine weißte Tischlampe mit Schirm."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Tischlampe</p>
+                <p class="product__price">12,00 €</p>
+              </div>
+              <button type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="sunglasses">
+            <div class="product__cover">
+              <img
+                class="img--sunglasses"
+                src="static/img/sunglasses.jpg"
+                height="370"
+                alt="Getönte Sonnenbrille mit pinkem Rahmen und großen Gläsern."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Sonnenbrille</p>
+                <p class="product__price">9,00 €</p>
+              </div>
+              <button type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="mask">
+            <div class="product__cover">
+              <img
+                class="img--mask"
+                src="static/img/mask.jpg"
+                height="370"
+                alt="Eine grüne chirurgische Maske."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Maske</p>
+                <p class="product__price">1,20 €</p>
+              </div>
+              <button type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="controller">
+            <div class="product__cover">
+              <img
+                class="img--controller"
+                src="static/img/controller.jpg"
+                height="370"
+                alt="Ein schwarzer XBox Controller."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Controller</p>
+                <p class="product__price">55,00 €</p>
+              </div>
+              <button type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+          <div class="product" data-shopid="bag">
+            <div class="product__cover">
+              <img
+                class="img--bag"
+                src="static/img/bag.jpg"
+                height="370"
+                alt="Eine braune Aktentasche."
+              />
+            </div>
+            <div class="product__content">
+              <div class="product__content__info">
+                <p class="product__title">Aktentasche</p>
+                <p class="product__price">25,50 €</p>
+              </div>
+              <button type="button" class="btn">Kaufen</button>
+            </div>
+          </div>
+        </div>
+        <h2>Warenkorb</h2>
+        <div class="multistep-form" hidden>
+          <div class="multistep-form__progress">
+            <div class="steps">
+              <div class="step">
+                <input
+                  type="radio"
+                  name="MultistepForm"
+                  id="multiStep1"
+                  checked
+                />
+                <label for="multiStep1">Schritt 1 von 3: Übersicht</label>
+                <span>1. Übersicht</span>
+              </div>
+              <div class="step">
+                <input
+                  type="radio"
+                  name="MultistepForm"
+                  id="multiStep2"
+                  disabled
+                />
+                <label for="multiStep2">Schritt 2 von 3: Bestellung</label>
+                <span>2. Bestellung</span>
+              </div>
+              <div class="step">
+                <input
+                  type="radio"
+                  name="MultistepForm"
+                  id="multiStep3"
+                  disabled
+                />
+                <label for="multiStep3">Schritt 3 von 3: Zusammenfassung</label>
+                <span>3. Zusammenfassung</span>
+              </div>
+            </div>
+            <!-- SR starts with 33% -->
+            <div
+              class="progressbar"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="3"
+              aria-valuenow="1"
+              style="--progressMaxValue: 3; --progressValue: 1"
+            >
+              <span class="progressbar__progress"> </span>
+            </div>
+          </div>
+          <div class="multistep-form__content">
+            <div class="stages">
+              <div class="stage-1 active">
+                <div class="table-wrapper" hidden>
+                  <div class="table-controls table-controls--mobile">
+                    <button
+                      type="button"
+                      id="mobileTableClearBtn"
+                      class="btn btn--small"
+                      aria-label="Warenkorb leeren"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <g
+                          stroke-width="1.5"
+                          stroke="#d11111"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="4" y1="7" x2="20" y2="7" />
+                          <line x1="10" y1="11" x2="10" y2="17" />
+                          <line x1="14" y1="11" x2="14" y2="17" />
+                          <path
+                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                          />
+                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                        </g></svg
+                      ><span>leeren</span>
+                    </button>
+                    <button
+                      type="button"
+                      id="mobileSortBtn"
+                      class="btn btn--small btn--sort"
+                      aria-label="Sortieroptionen öffnen"
+                      aria-expanded="false"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <g
+                          stroke-width="1.5"
+                          stroke="#7a7a7a"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <polyline points="8 9 12 5 16 9" />
+                          <polyline points="16 15 12 19 8 15" />
+                        </g>
+                      </svg>
+                      <span>sortieren</span>
+                    </button>
+                    <div id="mobileSortModal" class="modal">
+                      <div
+                        class="modal__dialog"
+                        aria-label="Warenkorbsortierung"
+                        role="dialog"
+                        aria-modal="true"
+                      >
+                        <div class="modal__content">
+                          <header class="modal__header">
+                            Warenkorbsortierung
+                            <button
+                              type="button"
+                              type="button"
+                              class="btn"
+                              data-dismiss="modal"
+                              aria-label="Sortieroptionen schließen"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </header>
+                          <div class="modal__body">
+                            <div class="sort-order-wrapper">
+                              <div
+                                class="toggle toggle--options glide text-hidden"
+                              >
+                                <input id="toggle-sort-order" type="checkbox" />
+                                <label for="toggle-sort-order">
+                                  <span
+                                    class="toggle__body"
+                                    data-checked="absteigend"
+                                    data-unchecked="aufsteigend"
+                                  ></span>
+                                  <span class="toggle__text"
+                                    >Sortierung der Reihenfolge</span
+                                  >
+                                </label>
+                              </div>
+                            </div>
+                            <fieldset id="filterkriterien">
+                              <legend>Filterkriterien</legend>
+                              <label>
+                                <input
+                                  type="radio"
+                                  name="Filterkriterien"
+                                  id="radio_Produktname"
+                                />
+                                <span>Produktname</span>
+                              </label>
+                              <label>
+                                <input
+                                  type="radio"
+                                  name="Filterkriterien"
+                                  id="radio_Stueckpreis"
+                                />
+                                <span>Stückpreis</span>
+                              </label>
+                              <label>
+                                <input
+                                  type="radio"
+                                  name="Filterkriterien"
+                                  id="radio_Mengenpreis"
+                                />
+                                <span>Mengenpreis</span>
+                              </label>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <table class="table" id="warenkorb" aria-label="Warenkorb">
+                    <caption class="visually-hidden">
+                      Auflistung aller zu kaufenden Produkte.
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>
+                          <button
+                            type="button"
+                            class="btn warenkorb__btn--tablehead"
+                            aria-label="Produktname aufsteigend sortieren"
+                            id="btn_Produktname"
+                          >
+                            <span>Produktname</span>
+                            <svg
+                              class="table-sorting-icons"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                            >
+                              <g class="icon__filter" fill="#7a7a7a">
+                                <path
+                                  d="M19.6 5H4.4c-.9 0-1.3 1.1-.7 1.7L10 13v6c0 .8.9 1.3 1.6.8l2-1.5c.3-.2.4-.5.4-.8V13l6.3-6.3c.6-.6.2-1.7-.7-1.7z"
+                                ></path>
+                              </g>
+                              <g
+                                class="icon__sort-ascending"
+                                stroke-width="1.5"
+                                stroke="#1F1F1F"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <title>aufsteigend sortieren</title>
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path
+                                  d="M15 10v-5c0 -1.38 .62 -2 2 -2s2 .62 2 2v5m0 -3h-4"
+                                />
+                                <path d="M19 21h-4l4 -7h-4" />
+                                <path d="M4 15l3 3l3 -3" />
+                                <path d="M7 6v12" />
+                              </g>
+                              <g
+                                class="icon__sort-descending"
+                                stroke-width="1.5"
+                                stroke="#1F1F1F"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <title>absteigend sortieren</title>
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path
+                                  d="M15 21v-5c0 -1.38 .62 -2 2 -2s2 .62 2 2v5m0 -3h-4"
+                                />
+                                <path d="M19 10h-4l4 -7h-4" />
+                                <path d="M4 15l3 3l3 -3" />
+                                <path d="M7 6v12" />
+                              </g>
+                            </svg>
+                          </button>
+                        </th>
+                        <th>Quantität</th>
+                        <th>
+                          <button
+                            type="button"
+                            class="btn warenkorb__btn--tablehead"
+                            aria-label="Stückpreis absteigend sortieren"
+                            id="btn_Stueckpreis"
+                          >
+                            <span>Stückpreis</span>
+                            <svg
+                              class="table-sorting-icons"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                            >
+                              <g class="icon__filter" fill="#7a7a7a">
+                                <path
+                                  d="M19.6 5H4.4c-.9 0-1.3 1.1-.7 1.7L10 13v6c0 .8.9 1.3 1.6.8l2-1.5c.3-.2.4-.5.4-.8V13l6.3-6.3c.6-.6.2-1.7-.7-1.7z"
+                                ></path>
+                              </g>
+                              <g
+                                class="icon__sort-ascending"
+                                stroke-width="1.5"
+                                stroke="#1F1F1F"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <title>aufsteigend sortieren</title>
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M4 15l3 3l3 -3" />
+                                <path d="M7 6v12" />
+                                <path
+                                  d="M17 3a2 2 0 0 1 2 2v3a2 2 0 1 1 -4 0v-3a2 2 0 0 1 2 -2z"
+                                />
+                                <circle cx="17" cy="16" r="2" />
+                                <path d="M19 16v3a2 2 0 0 1 -2 2h-1.5" />
+                              </g>
+                              <g
+                                class="icon__sort-descending"
+                                stroke-width="1.5"
+                                stroke="#1F1F1F"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <title>absteigend sortieren</title>
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M4 15l3 3l3 -3" />
+                                <path d="M7 6v12" />
+                                <path
+                                  d="M17 14a2 2 0 0 1 2 2v3a2 2 0 1 1 -4 0v-3a2 2 0 0 1 2 -2z"
+                                />
+                                <circle cx="17" cy="5" r="2" />
+                                <path d="M19 5v3a2 2 0 0 1 -2 2h-1.5" />
+                              </g>
+                            </svg>
+                          </button>
+                        </th>
+                        <th>
+                          <button
+                            type="button"
+                            class="btn warenkorb__btn--tablehead"
+                            aria-label="Mengenpreis absteigend sortieren"
+                            id="btn_Mengenpreis"
+                          >
+                            <span>Mengenpreis</span>
+                            <svg
+                              class="table-sorting-icons"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                            >
+                              <g class="icon__filter" fill="#7a7a7a">
+                                <path
+                                  d="M19.6 5H4.4c-.9 0-1.3 1.1-.7 1.7L10 13v6c0 .8.9 1.3 1.6.8l2-1.5c.3-.2.4-.5.4-.8V13l6.3-6.3c.6-.6.2-1.7-.7-1.7z"
+                                ></path>
+                              </g>
+                              <g
+                                class="icon__sort-ascending"
+                                stroke-width="1.5"
+                                stroke="#1F1F1F"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <title>aufsteigend sortieren</title>
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M4 15l3 3l3 -3" />
+                                <path d="M7 6v12" />
+                                <path
+                                  d="M17 3a2 2 0 0 1 2 2v3a2 2 0 1 1 -4 0v-3a2 2 0 0 1 2 -2z"
+                                />
+                                <circle cx="17" cy="16" r="2" />
+                                <path d="M19 16v3a2 2 0 0 1 -2 2h-1.5" />
+                              </g>
+                              <g
+                                class="icon__sort-descending"
+                                stroke-width="1.5"
+                                stroke="#1F1F1F"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <title>absteigend sortieren</title>
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M4 15l3 3l3 -3" />
+                                <path d="M7 6v12" />
+                                <path
+                                  d="M17 14a2 2 0 0 1 2 2v3a2 2 0 1 1 -4 0v-3a2 2 0 0 1 2 -2z"
+                                />
+                                <circle cx="17" cy="5" r="2" />
+                                <path d="M19 5v3a2 2 0 0 1 -2 2h-1.5" />
+                              </g>
+                            </svg>
+                          </button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                  <div class="table-controls">
+                    <button
+                      type="button"
+                      id="tableClearBtn"
+                      class="btn btn--small btn--clear"
+                      aria-label="Warenkorb leeren"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <g
+                          stroke-width="1.5"
+                          stroke="#d11111"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="4" y1="7" x2="20" y2="7" />
+                          <line x1="10" y1="11" x2="10" y2="17" />
+                          <line x1="14" y1="11" x2="14" y2="17" />
+                          <path
+                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                          />
+                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                        </g></svg
+                      ><span>leeren</span>
+                    </button>
+                    <button
+                      type="button"
+                      data-trigger="stage2"
+                      class="btn btn--big btn--buy"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="#6c5434"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="6" cy="19" r="2" />
+                        <circle cx="17" cy="19" r="2" />
+                        <path d="M17 17h-11v-14h-2" />
+                        <path d="M6 5l14 1l-1 7h-13" />
+                      </svg>
+                      <span>Kaufabwicklung</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="stage-2" aria-hidden="true">
+                <table
+                  class="table"
+                  id="bestelluebersicht"
+                  aria-label="Bestellübersicht"
+                >
+                  <caption class="visually-hidden">
+                    Auflistung aller zu bestellender Produkte.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th>Produktname</th>
+                      <th>Quantität</th>
+                      <th>Stückpreis</th>
+                      <th>Mengenpreis</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                  <tfoot></tfoot>
+                </table>
+                <div class="coupon-wrapper">
+                  <div class="coupon__border">
+                    <div class="coupon-header">
+                      <p>Besitzen Sie einen Gutschein Code?</p>
+                      <span id="coupon-status" aria-hidden="true" hidden></span>
+                    </div>
+                    <form method="POST" class="coupon" id="coupon-form">
+                      <legend class="visually-hidden">
+                        <h3>Gutscheinverwertung</h3>
+                      </legend>
+                      <label for="coupon-input">Gutschein Code einlösen</label>
+                      <input
+                        type="search"
+                        name="coupon"
+                        id="coupon-input"
+                        placeholder="Code eingeben..."
+                      />
+                      <button class="btn btn--small">prüfen</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="table-controls">
+                  <button
+                    type="button"
+                    data-trigger="stage1"
+                    class="btn btn--small"
+                    aria-label="zum vorherigen Bestellschritt"
+                  >
+                    zurück
+                  </button>
+                  <button
+                    type="button"
+                    data-trigger="stage3"
+                    class="btn btn--big btn--buy"
+                  >
+                    Bestellübersicht
+                  </button>
+                </div>
+              </div>
+              <div class="stage-3" aria-hidden="true">
+                <table
+                  class="table"
+                  id="bestellzusammenfassung"
+                  aria-label="Bestellzusammenfassung"
+                >
+                  <caption class="visually-hidden">
+                    Auflistung aller zu zahlender Kosten.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th>Kostenpunkte</th>
+                      <th>Kosten</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                  <tfoot></tfoot>
+                </table>
+                <div class="table-controls">
+                  <button
+                    type="button"
+                    data-trigger="stage2"
+                    class="btn btn--small"
+                    aria-label="zum vorherigen Bestellschritt"
+                  >
+                    zurück
+                  </button>
+                  <button
+                    id="finishOrderBtn"
+                    type="button"
+                    data-trigger="stage1"
+                    class="btn btn--big btn--buy"
+                  >
+                    verbindlich bestellen
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p id="warenkorb-empty-message">leer</p>
+        <div id="order-confirmation">
+          <p>Vielen Dank für den Einkauf.</p>
+          <div class="circle">
+            <div class="circle__back"></div>
+            <div class="circle__front">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 52 60"
+                fill="none"
+              >
+                <g>
+                  <path
+                    d="M50.9092 12.3511C52.3601 13.816 52.3601 16.1832 50.9092 17.648L21.1949 47.648C19.744 49.1128 17.3993 49.1128 15.9485 47.648L1.08807 32.648C-0.362363 31.1831 -0.362363 28.816 1.08807 27.3511C2.53873 25.8863 4.89033 25.8863 6.34123 27.3511L18.4672 39.691L45.6627 12.3511C47.1136 10.8839 49.4583 10.8839 50.9092 12.3511Z"
+                    fill="white"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+          <p>Die Bestellung wird versendet.</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
