@@ -1,4 +1,4 @@
-# DCM: Dynamic Client-Server Code Migration
+# Demo: Enhancing Web Applications with Dynamic Code Migration Capabilities
 
 This is the online appendix for the following paper submission:
 
