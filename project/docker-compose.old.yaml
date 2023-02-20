@@ -38,7 +38,7 @@ services:
         go install .
         webserver
   build-wasm:
-    image: asenger/wasm-builder:0.0.15
+    image: sebastianheil/wasm-builder:latest
     environment:
       - CFD=backend/src/webserver/CFD.yaml
       - WWW=backend/src/webserver/frontend/public/js/CodeDistributor
